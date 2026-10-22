@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Quarters Allotment Portal</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bitter:wght@600;700&family=Public+Sans:wght@400;500;600&display=swap">
+<style>
+:root{--bg:#f2f5f7;--surface:#fff;--ink:#14232e;--muted:#52636f;--line:#d3dde4;--teal:#0f6b6b;--teal-ink:#fff;--brass:#a8771c;--ok:#1b6e3a;--bad:#a33a2b}
+@media (prefers-color-scheme:dark){:root{--bg:#0e1a22;--surface:#162630;--ink:#e6eef3;--muted:#9bb0bd;--line:#2a3f4c;--teal:#4fb3b0;--teal-ink:#08201f;--brass:#e0b25a;--ok:#6fcf93;--bad:#ef8f80}}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.6 "Public Sans",system-ui,sans-serif}
+.wrap{max-width:860px;margin:0 auto;padding:0 20px}
+header{border-bottom:1px solid var(--line);background:var(--surface)}
+header .wrap{display:flex;gap:16px;align-items:center;justify-content:space-between;flex-wrap:wrap;padding-top:14px;padding-bottom:14px}
+.brand{font:700 18px "Bitter",Georgia,serif}
+nav a{color:var(--muted);text-decoration:none;margin-left:16px;font-weight:500;font-size:15px}
+nav a:hover,nav a:focus-visible{color:var(--teal);text-decoration:underline}
+h1,h2{font-family:"Bitter",Georgia,serif;line-height:1.2}
+h1{font-size:clamp(30px,6vw,46px);margin:48px 0 12px;max-width:16em}
+.lead{color:var(--muted);max-width:36em;margin:0 0 28px;font-size:18px}
+h2{font-size:26px;margin:56px 0 8px}
+.sub{color:var(--muted);margin:0 0 20px}
+a.btn,button{font:600 16px "Public Sans",sans-serif;background:var(--teal);color:var(--teal-ink);border:0;border-radius:6px;padding:11px 18px;cursor:pointer;text-decoration:none;display:inline-block}
+a.btn.alt{background:transparent;color:var(--teal);border:1.5px solid var(--teal)}
+:focus-visible{outline:3px solid var(--brass);outline-offset:2px}
+/* process */
+ol.steps{list-style:none;margin:0;padding:0;counter-reset:s}
+ol.steps li{counter-increment:s;position:relative;padding:0 0 22px 56px;border-left:0}
+ol.steps li::before{content:counter(s);position:absolute;left:0;top:0;width:36px;height:36px;border-radius:50%;background:var(--surface);border:2px solid var(--teal);color:var(--teal);font:700 16px "Bitter",serif;display:grid;place-items:center}
+ol.steps li::after{content:"";position:absolute;left:17px;top:40px;bottom:4px;width:2px;background:var(--line)}
+ol.steps li:last-child::after{display:none}
+ol.steps h3{margin:0 0 2px;font-size:17px}
+ol.steps p{margin:0;color:var(--muted)}
+.who{display:inline-block;font-size:13px;font-weight:600;color:var(--brass);margin-left:6px}
+/* card/forms */
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:22px}
+label{display:block;font-weight:600;margin:14px 0 4px;font-size:15px}
+select,input{width:100%;font:inherit;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:10px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:560px){.row{grid-template-columns:1fr}nav a{margin:0 14px 0 0}}
+#result{margin-top:18px;padding:14px 16px;border-radius:8px;border-left:5px solid var(--line);background:var(--bg);display:none}
+#result.ok{border-color:var(--ok);display:block}
+#result.bad{border-color:var(--bad);display:block}
+#result strong{display:block;margin-bottom:2px}
+.note{font-size:14px;color:var(--muted);margin-top:12px}
+/* notices */
+.notice{display:flex;justify-content:space-between;gap:16px;padding:14px 0;border-bottom:1px solid var(--line);align-items:center;flex-wrap:wrap}
+.notice:first-child{border-top:1px solid var(--line)}
+.notice b{display:block}
+.notice span{color:var(--muted);font-size:14px}
+.tag{font-size:13px;font-weight:600;padding:2px 10px;border-radius:99px;border:1px solid var(--line)}
+.tag.open{color:var(--ok);border-color:var(--ok)}
+details{border-bottom:1px solid var(--line);padding:12px 0}
+summary{cursor:pointer;font-weight:600}
+details p{margin:8px 0 0;color:var(--muted)}
+footer{margin:64px 0 32px;color:var(--muted);font-size:14px;border-top:1px solid var(--line);padding-top:16px}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <div class="brand" id="brand"></div>
+  <nav aria-label="Sections"><a href="#process">Process</a><a href="#check">Eligibility</a><a href="#apply">Apply</a><a href="#status">Status</a><a href="#notices">Circulars</a><a href="#faq">FAQ</a></nav>
+</div></header>
+
+<main class="wrap">
+  <h1>How staff quarters are allotted</h1>
+  <p class="lead">Nine steps, from circular to occupation. Check whether you are eligible before you apply.</p>
+  <a class="btn" href="#check">Check my eligibility</a> <a class="btn alt" href="#notices">View circulars</a>
+
+  <h2 id="process">The allotment process</h2>
+  <p class="sub">Every allotment follows this order.</p>
+  <ol class="steps">
+    <li><h3>Circular published</h3><p>The Estate section announces the quarters available and the last date to apply.</p></li>
+    <li><h3>You apply</h3><p>Apply for quarters of your eligible pay level within the circular dates.</p></li>
+    <li><h3>Eligibility check <span class="who">Estate section</span></h3><p>We confirm you applied for your eligible pay level. If you already occupy quarters, you may seek a change only after 3 years, counted as on the circular date. Otherwise you are not eligible.</p></li>
+    <li><h3>Seniority requested</h3><p>The eligible applicant list goes to the Establishment section to obtain seniority.</p></li>
+    <li><h3>Final list published</h3><p>Once seniority is received, the final list is published.</p></li>
+    <li><h3>Allotment prepared and approved <span class="who">Director</span></h3><p>Quarters are matched by seniority and eligibility, then sent to the Director for approval.</p></li>
+    <li><h3>Declaration form</h3><p>Allottees submit a signed declaration form. <a href="declaration.html">Print the form</a>.</p></li>
+    <li><h3>Allotment order issued</h3><p>You receive your allotment order.</p></li>
+    <li><h3>Sign the registers</h3><p>Sign the occupation register for the new quarters. If you are changing quarters, also sign the vacation register of the quarters you are leaving.</p></li>
+  </ol>
+
+  <h2 id="check">Eligibility check</h2>
+  <p class="sub">A quick self-check. The Estate section's decision is final.</p>
+  <div class="panel">
+    <div class="row">
+      <div><label for="lvl">Your pay level</label><select id="lvl"></select></div>
+      <div><label for="cd">Circular date</label><input type="date" id="cd"></div>
+    </div>
+    <label for="occ">Do you already live in institute quarters?</label>
+    <select id="occ"><option value="no">No</option><option value="yes">Yes</option></select>
+    <div id="occWrap" hidden><label for="od">Date you occupied your current quarters</label><input type="date" id="od"></div>
+    <div style="margin-top:18px"><button id="go" type="button">Check</button></div>
+    <div id="result" role="status" aria-live="polite"></div>
+    <p class="note">Pay level to quarters type is set in the CONFIG block of this file. Update it to match your rules.</p>
+  </div>
+
+  <h2 id="apply">Apply online</h2>
+  <p class="sub">Apply only for your eligible pay level, within the circular dates.</p>
+  <div class="panel" id="applyBox"></div>
+  <p class="note">After allotment, print and sign the <a href="declaration.html">declaration form</a> and submit it to the Estate section.</p>
+
+  <h2 id="status">Track your application</h2>
+  <p class="sub">Enter your employee ID to see the current stage.</p>
+  <div class="panel">
+    <label for="eid">Employee ID</label>
+    <input id="eid" autocomplete="off">
+    <div style="margin-top:18px"><button id="chk" type="button">Show status</button></div>
+    <div id="sres" role="status" aria-live="polite" style="margin-top:18px;padding:14px 16px;border-radius:8px;border-left:5px solid var(--line);background:var(--bg);display:none"></div>
+    <p class="note">Stages: Applied, Eligibility checked, Sent for seniority, Final list published, Sent to Director, Declaration pending, Allotted.</p>
+  </div>
+
+  <h2 id="notices">Circulars and lists</h2>
+  <p class="sub">Add new items in the NOTICES list in this file. Put PDFs in the <code>files</code> folder.</p>
+  <div id="noticeList"></div>
+
+  <h2 id="faq">Questions</h2>
+  <details><summary>Can I apply for a higher type than my pay level?</summary><p>No. Applications for any type other than your eligible pay level are rejected at the eligibility check.</p></details>
+  <details><summary>I already have quarters. When can I apply for a change?</summary><p>After 3 years in your current quarters, counted as on the date of the circular.</p></details>
+  <details><summary>What do I sign after receiving the allotment order?</summary><p>The occupation register. For a change of quarters, also the vacation register of your previous quarters.</p></details>
+  <details><summary>Who decides the seniority?</summary><p>The Establishment section provides it. The Director approves the final allotment.</p></details>
+
+  <footer id="foot"></footer>
+</main>
+
+<script>
+/* ===== CONFIG: edit these ===== */
+var INSTITUTE = "Institute Estate Section";
+var CONTACT   = "estate@example.edu | Office hours 9:30 to 17:30";
+var MIN_YEARS_IN_QUARTERS = 3;
+var FORM_URL = "";   /* paste your Google Form link here (the /viewform one) */
+var SALT = "change-this-salt";   /* must match tools/make_status.py */
+/* Pay level => quarters type. Replace with your actual rules. */
+var ELIGIBILITY = {
+  1:"Type I",2:"Type I",3:"Type II",4:"Type II",5:"Type III",6:"Type III",
+  7:"Type IV",8:"Type IV",9:"Type IV",10:"Type V",11:"Type V",12:"Type VI",13:"Type VI",14:"Type VII"
+};
+/* ===== NOTICES: newest first ===== */
+var NOTICES = [
+  {title:"Quarters circular (sample)", date:"2026-10-01", note:"Applications open", file:"files/circular.pdf", open:true},
+  {title:"Final list (sample)", date:"2026-08-12", note:"Previous cycle", file:"files/final-list.pdf", open:false}
+];
+/* ================================ */
+(function(){
+  document.getElementById("brand").textContent = INSTITUTE;
+  document.title = "Quarters Allotment | " + INSTITUTE;
+  document.getElementById("foot").textContent = CONTACT;
+  var lvl = document.getElementById("lvl");
+  Object.keys(ELIGIBILITY).forEach(function(k){
+    var o = document.createElement("option"); o.value = k; o.textContent = "Level " + k; lvl.appendChild(o);
+  });
+  var occ = document.getElementById("occ"), wrap = document.getElementById("occWrap");
+  occ.addEventListener("change", function(){ wrap.hidden = occ.value !== "yes"; });
+
+  document.getElementById("go").addEventListener("click", function(){
+    var r = document.getElementById("result"), type = ELIGIBILITY[lvl.value];
+    var cd = document.getElementById("cd").value, od = document.getElementById("od").value;
+    var ok = true, msg = "You can apply for " + type + " quarters.";
+    if (occ.value === "yes") {
+      if (!cd || !od) { r.className = "bad"; r.innerHTML = "<strong>Dates needed</strong>Enter the circular date and your occupation date."; return; }
+      var limit = new Date(od); limit.setFullYear(limit.getFullYear() + MIN_YEARS_IN_QUARTERS);
+      if (new Date(cd) < limit) {
+        ok = false;
+        msg = "You must complete " + MIN_YEARS_IN_QUARTERS + " years in your current quarters as on the circular date. You reach that on " + limit.toDateString() + ".";
+      } else { msg = "You have completed " + MIN_YEARS_IN_QUARTERS + " years. You can apply for a change to " + type + " quarters."; }
+    }
+    r.className = ok ? "ok" : "bad";
+    r.innerHTML = "<strong>" + (ok ? "Likely eligible" : "Not eligible for this circular") + "</strong>" + msg;
+  });
+
+  var box = document.getElementById("applyBox");
+  if (FORM_URL) {
+    box.innerHTML = '<p style="margin-top:0">Fill the form once. Keep the confirmation email as proof.</p>';
+    var a2 = document.createElement("a"); a2.className = "btn"; a2.href = FORM_URL; a2.target = "_blank"; a2.rel = "noopener"; a2.textContent = "Open application form";
+    box.appendChild(a2);
+  } else { box.textContent = "The application form is not open yet. Check Circulars for the next date."; }
+
+  document.getElementById("chk").addEventListener("click", function(){
+    var id = document.getElementById("eid").value.trim().toUpperCase(), out = document.getElementById("sres");
+    function show(c, h, m){ out.style.display = "block"; out.style.borderColor = c; out.innerHTML = "<strong>" + h + "</strong>" + m; }
+    if (!id) { show("var(--bad)", "Enter your ID", ""); return; }
+    if (!window.crypto || !crypto.subtle) { show("var(--bad)", "Not supported", "Open this page over https."); return; }
+    crypto.subtle.digest("SHA-256", new TextEncoder().encode(SALT + id)).then(function(buf){
+      var h = Array.from(new Uint8Array(buf)).map(function(x){ return x.toString(16).padStart(2, "0"); }).join("");
+      return fetch("status.json", {cache: "no-store"}).then(function(r){ return r.json(); }).then(function(db){
+        var e = db[h];
+        if (!e) { show("var(--bad)", "No record found", "Check your ID, or contact the Estate section."); return; }
+        show("var(--ok)", e.stage, e.quarters ? "Quarters: " + e.quarters : "");
+        if (e.order) { var d = document.createElement("a"); d.className = "btn"; d.href = e.order; d.download = "allotment-order.pdf"; d.style.marginTop = "12px"; d.textContent = "Download allotment order"; out.appendChild(document.createElement("br")); out.appendChild(d); }
+      });
+    }).catch(function(){ show("var(--bad)", "Could not load status", "Try again later."); });
+  });
+
+  var list = document.getElementById("noticeList");
+  NOTICES.forEach(function(n){
+    var d = document.createElement("div"); d.className = "notice";
+    var left = document.createElement("div");
+    var b = document.createElement("b"); b.textContent = n.title;
+    var s = document.createElement("span"); s.textContent = new Date(n.date).toLocaleDateString("en-IN",{day:"numeric",month:"long",year:"numeric"}) + " - " + n.note;
+    left.appendChild(b); left.appendChild(s);
+    var right = document.createElement("div");
+    if (n.open) { var t = document.createElement("span"); t.className = "tag open"; t.textContent = "Open"; right.appendChild(t); right.appendChild(document.createTextNode(" ")); }
+    var a = document.createElement("a"); a.href = n.file; a.textContent = "Download PDF"; a.className = "btn alt"; a.style.padding = "6px 12px"; right.appendChild(a);
+    d.appendChild(left); d.appendChild(right); list.appendChild(d);
+  });
+})();
+</script>
+</body>
+</html>
