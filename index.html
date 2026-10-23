@@ -1,212 +1,249 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Quarters Allotment Portal</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bitter:wght@600;700&family=Public+Sans:wght@400;500;600&display=swap">
+<title>NIT Trichy | Quarters Allotment Portal — Prototype</title>
 <style>
-:root{--bg:#f2f5f7;--surface:#fff;--ink:#14232e;--muted:#52636f;--line:#d3dde4;--teal:#0f6b6b;--teal-ink:#fff;--brass:#a8771c;--ok:#1b6e3a;--bad:#a33a2b}
-@media (prefers-color-scheme:dark){:root{--bg:#0e1a22;--surface:#162630;--ink:#e6eef3;--muted:#9bb0bd;--line:#2a3f4c;--teal:#4fb3b0;--teal-ink:#08201f;--brass:#e0b25a;--ok:#6fcf93;--bad:#ef8f80}}
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.6 "Public Sans",system-ui,sans-serif}
-.wrap{max-width:860px;margin:0 auto;padding:0 20px}
-header{border-bottom:1px solid var(--line);background:var(--surface)}
-header .wrap{display:flex;gap:16px;align-items:center;justify-content:space-between;flex-wrap:wrap;padding-top:14px;padding-bottom:14px}
-.brand{font:700 18px "Bitter",Georgia,serif}
-nav a{color:var(--muted);text-decoration:none;margin-left:16px;font-weight:500;font-size:15px}
-nav a:hover,nav a:focus-visible{color:var(--teal);text-decoration:underline}
-h1,h2{font-family:"Bitter",Georgia,serif;line-height:1.2}
-h1{font-size:clamp(30px,6vw,46px);margin:48px 0 12px;max-width:16em}
-.lead{color:var(--muted);max-width:36em;margin:0 0 28px;font-size:18px}
-h2{font-size:26px;margin:56px 0 8px}
-.sub{color:var(--muted);margin:0 0 20px}
-a.btn,button{font:600 16px "Public Sans",sans-serif;background:var(--teal);color:var(--teal-ink);border:0;border-radius:6px;padding:11px 18px;cursor:pointer;text-decoration:none;display:inline-block}
-a.btn.alt{background:transparent;color:var(--teal);border:1.5px solid var(--teal)}
-:focus-visible{outline:3px solid var(--brass);outline-offset:2px}
-/* process */
-ol.steps{list-style:none;margin:0;padding:0;counter-reset:s}
-ol.steps li{counter-increment:s;position:relative;padding:0 0 22px 56px;border-left:0}
-ol.steps li::before{content:counter(s);position:absolute;left:0;top:0;width:36px;height:36px;border-radius:50%;background:var(--surface);border:2px solid var(--teal);color:var(--teal);font:700 16px "Bitter",serif;display:grid;place-items:center}
-ol.steps li::after{content:"";position:absolute;left:17px;top:40px;bottom:4px;width:2px;background:var(--line)}
-ol.steps li:last-child::after{display:none}
-ol.steps h3{margin:0 0 2px;font-size:17px}
-ol.steps p{margin:0;color:var(--muted)}
-.who{display:inline-block;font-size:13px;font-weight:600;color:var(--brass);margin-left:6px}
-/* card/forms */
-.panel{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:22px}
-label{display:block;font-weight:600;margin:14px 0 4px;font-size:15px}
-select,input{width:100%;font:inherit;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:10px}
-.row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-@media(max-width:560px){.row{grid-template-columns:1fr}nav a{margin:0 14px 0 0}}
-#result{margin-top:18px;padding:14px 16px;border-radius:8px;border-left:5px solid var(--line);background:var(--bg);display:none}
-#result.ok{border-color:var(--ok);display:block}
-#result.bad{border-color:var(--bad);display:block}
-#result strong{display:block;margin-bottom:2px}
-.note{font-size:14px;color:var(--muted);margin-top:12px}
-/* notices */
-.notice{display:flex;justify-content:space-between;gap:16px;padding:14px 0;border-bottom:1px solid var(--line);align-items:center;flex-wrap:wrap}
-.notice:first-child{border-top:1px solid var(--line)}
-.notice b{display:block}
-.notice span{color:var(--muted);font-size:14px}
-.tag{font-size:13px;font-weight:600;padding:2px 10px;border-radius:99px;border:1px solid var(--line)}
-.tag.open{color:var(--ok);border-color:var(--ok)}
-details{border-bottom:1px solid var(--line);padding:12px 0}
-summary{cursor:pointer;font-weight:600}
-details p{margin:8px 0 0;color:var(--muted)}
-footer{margin:64px 0 32px;color:var(--muted);font-size:14px;border-top:1px solid var(--line);padding-top:16px}
+:root{--navy:#12304a;--blue:#205b85;--teal:#187a75;--bg:#f3f6fa;--card:#fff;--ink:#172b3a;--muted:#617487;--line:#dce5ed;--amber:#9a5a08;--red:#a33333;--green:#19704b}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.45 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+header{background:var(--navy);color:#fff;padding:20px max(20px,calc((100vw - 1200px)/2));display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:12px}.crest{width:44px;height:44px;border:1px solid #91a9bd;border-radius:50%;display:grid;place-items:center;font-weight:800}.brand h1{font-size:18px;margin:0}.brand p{margin:3px 0 0;color:#c6d5e2;font-size:12px}
+.header-tag{font-size:12px;background:#25465e;padding:7px 10px;border-radius:999px}
+.wrap{max-width:1200px;margin:22px auto;padding:0 18px}.notice{background:#fff8e8;border:1px solid #eed59b;color:#694a12;border-radius:10px;padding:12px 14px;margin-bottom:18px;font-size:13px}
+nav{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}.tab,button,.file-button{border:1px solid var(--line);border-radius:9px;padding:10px 13px;background:#fff;color:var(--ink);font:inherit;cursor:pointer}.tab.active{background:var(--navy);color:#fff;border-color:var(--navy)}button.primary{background:var(--blue);color:white;border-color:var(--blue)}button:disabled{opacity:.5;cursor:not-allowed}
+.panel{display:none}.panel.active{display:block}.section-head{display:flex;align-items:end;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:4px 0 14px}.section-head h2{font-size:21px;margin:0}.section-head p{color:var(--muted);margin:4px 0 0;font-size:13px}
+.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:16px}.metric,.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px;box-shadow:0 2px 8px #1a355008}.metric .label{color:var(--muted);font-size:12px}.metric .value{font-size:27px;font-weight:750;margin:5px 0}.metric .sub{color:var(--muted);font-size:12px}
+.two{display:grid;grid-template-columns:1.2fr .8fr;gap:14px}.card h3{font-size:15px;margin:0 0 12px}.barrow{display:grid;grid-template-columns:110px 1fr 35px;gap:10px;align-items:center;margin:12px 0;font-size:13px}.bar{height:9px;background:#e9eff4;border-radius:99px;overflow:hidden}.bar span{display:block;height:100%;background:var(--teal);border-radius:99px}
+.table-wrap{overflow:auto;background:#fff;border:1px solid var(--line);border-radius:12px}table{border-collapse:collapse;width:100%;min-width:740px;font-size:13px}th,td{text-align:left;padding:12px 13px;border-bottom:1px solid var(--line);vertical-align:top}th{background:#f7f9fb;color:#53697a;font-weight:650;white-space:nowrap}tr:last-child td{border-bottom:0}.pill{display:inline-block;border-radius:99px;padding:4px 8px;font-size:11px;font-weight:700;white-space:nowrap}.vacant{background:#e4f5ec;color:#176743}.occupied{background:#e9eff8;color:#315d8c}.maintenance{background:#fff0d8;color:#87520b}.pending{background:#fff0d8;color:#87520b}.approved{background:#e4f5ec;color:#176743}
+.toolbar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}.toolbar input,.toolbar select,input,select,textarea{font:inherit;border:1px solid #ccd8e2;border-radius:8px;padding:10px;background:white;color:var(--ink);max-width:100%}.toolbar input{flex:1;min-width:190px}.toolbar select{min-width:140px}
+.formgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.field{display:flex;flex-direction:column;gap:5px}.field label{font-size:12px;color:var(--muted);font-weight:650}.field input,.field select,.field textarea{width:100%}.field.full{grid-column:1/-1}.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}.small{font-size:12px;color:var(--muted)}.empty{padding:20px;color:var(--muted);text-align:center}.status-msg{margin-top:12px;padding:10px;border-radius:8px;background:#e8f5ee;color:#185e40;display:none}
+footer{max-width:1200px;margin:20px auto;padding:0 18px 28px;color:var(--muted);font-size:12px}
+@media(max-width:800px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.two{grid-template-columns:1fr}.formgrid{grid-template-columns:1fr}.field.full{grid-column:auto}}
+@media(max-width:430px){.grid{grid-template-columns:1fr 1fr}.metric{padding:12px}.metric .value{font-size:23px}}
 </style>
 </head>
 <body>
-<header><div class="wrap">
-  <div class="brand" id="brand"></div>
-  <nav aria-label="Sections"><a href="#process">Process</a><a href="#check">Eligibility</a><a href="#apply">Apply</a><a href="#status">Status</a><a href="#notices">Circulars</a><a href="#faq">FAQ</a></nav>
-</div></header>
-
+<header>
+ <div class="brand"><div class="crest">NIT</div><div><h1>Quarters Allotment Portal</h1><p>National Institute of Technology Tiruchirappalli · EMD</p></div></div>
+ <div class="header-tag">DEMO · FICTIONAL DATA · NOT AN OFFICIAL NITT SERVICE</div>
+</header>
 <main class="wrap">
-  <h1>How staff quarters are allotted</h1>
-  <p class="lead">Nine steps, from circular to occupation. Check whether you are eligible before you apply.</p>
-  <a class="btn" href="#check">Check my eligibility</a> <a class="btn alt" href="#notices">View circulars</a>
-
-  <h2 id="process">The allotment process</h2>
-  <p class="sub">Every allotment follows this order.</p>
-  <ol class="steps">
-    <li><h3>Circular published</h3><p>The Estate section announces the quarters available and the last date to apply.</p></li>
-    <li><h3>You apply</h3><p>Apply for quarters of your eligible pay level within the circular dates.</p></li>
-    <li><h3>Eligibility check <span class="who">Estate section</span></h3><p>We confirm you applied for your eligible pay level. If you already occupy quarters, you may seek a change only after 3 years, counted as on the circular date. Otherwise you are not eligible.</p></li>
-    <li><h3>Seniority requested</h3><p>The eligible applicant list goes to the Establishment section to obtain seniority.</p></li>
-    <li><h3>Final list published</h3><p>Once seniority is received, the final list is published.</p></li>
-    <li><h3>Allotment prepared and approved <span class="who">Director</span></h3><p>Quarters are matched by seniority and eligibility, then sent to the Director for approval.</p></li>
-    <li><h3>Declaration form</h3><p>Allottees submit a signed declaration form. <a href="declaration.html">Print the form</a>.</p></li>
-    <li><h3>Allotment order issued</h3><p>You receive your allotment order.</p></li>
-    <li><h3>Sign the registers</h3><p>Sign the occupation register for the new quarters. If you are changing quarters, also sign the vacation register of the quarters you are leaving.</p></li>
-  </ol>
-
-  <h2 id="check">Eligibility check</h2>
-  <p class="sub">A quick self-check. The Estate section's decision is final.</p>
-  <div class="panel">
-    <div class="row">
-      <div><label for="lvl">Your pay level</label><select id="lvl"></select></div>
-      <div><label for="cd">Circular date</label><input type="date" id="cd"></div>
-    </div>
-    <label for="occ">Do you already live in institute quarters?</label>
-    <select id="occ"><option value="no">No</option><option value="yes">Yes</option></select>
-    <div id="occWrap" hidden><label for="od">Date you occupied your current quarters</label><input type="date" id="od"></div>
-    <div style="margin-top:18px"><button id="go" type="button">Check</button></div>
-    <div id="result" role="status" aria-live="polite"></div>
-    <p class="note">Pay level to quarters type is set in the CONFIG block of this file. Update it to match your rules.</p>
+ <div class="notice"><strong>Prototype notice:</strong> This is a local demonstration using fictional data. It is not connected to NITT systems, does not authenticate users, and must not be used for real employee or financial records.</div>
+ <nav aria-label="Main navigation">
+  <button class="tab active" data-tab="dashboard">Dashboard</button>
+  <button class="tab" data-tab="inventory">Quarters Inventory</button>
+  <button class="tab" data-tab="applications">Applications</button>
+  <button class="tab" data-tab="workflow">Allotment Workflow</button>
+  <button class="tab" data-tab="eligibility">Eligibility Review</button>
+  <button class="tab" data-tab="employee">Employee Self-Service</button>
+  <button class="tab" data-tab="import">Import / Export</button>
+ </nav>
+ <section class="panel active" id="dashboard">
+  <div class="section-head"><div><h2>Administration dashboard</h2><p>Illustrative summary of the quarters estate.</p></div><button class="primary" onclick="switchTab('inventory')">View inventory</button></div>
+  <div class="grid">
+   <div class="metric"><div class="label">Total quarters in demo</div><div class="value" id="mTotal">12</div><div class="sub">Replace with verified inventory</div></div>
+   <div class="metric"><div class="label">Vacant</div><div class="value" id="mVacant">0</div><div class="sub">Available status in demo</div></div>
+   <div class="metric"><div class="label">Occupied</div><div class="value" id="mOccupied">0</div><div class="sub">Currently occupied in demo</div></div>
+   <div class="metric"><div class="label">Applications pending</div><div class="value" id="mPending">0</div><div class="sub">Requires staff review</div></div>
   </div>
-
-  <h2 id="apply">Apply online</h2>
-  <p class="sub">Apply only for your eligible pay level, within the circular dates.</p>
-  <div class="panel" id="applyBox"></div>
-  <p class="note">After allotment, print and sign the <a href="declaration.html">declaration form</a> and submit it to the Estate section.</p>
-
-  <h2 id="status">Track your application</h2>
-  <p class="sub">Enter your employee ID to see the current stage.</p>
-  <div class="panel">
-    <label for="eid">Employee ID</label>
-    <input id="eid" autocomplete="off">
-    <div style="margin-top:18px"><button id="chk" type="button">Show status</button></div>
-    <div id="sres" role="status" aria-live="polite" style="margin-top:18px;padding:14px 16px;border-radius:8px;border-left:5px solid var(--line);background:var(--bg);display:none"></div>
-    <p class="note">Stages: Applied, Eligibility checked, Sent for seniority, Final list published, Sent to Director, Declaration pending, Allotted.</p>
+  <div class="two">
+   <div class="card"><h3>Inventory by status</h3><div id="statusBars"></div></div>
+   <div class="card"><h3>Recent applications</h3><div id="recentApps"></div><p class="small">Application names and IDs shown here are fictional.</p></div>
   </div>
+ </section>
+ <section class="panel" id="inventory">
+  <div class="section-head"><div><h2>Quarters inventory</h2><p>Search, filter, add demo records, and export a CSV copy.</p></div><button class="primary" onclick="exportCSV('quarters')">Export quarters CSV</button></div>
+  <div class="toolbar"><input id="qSearch" placeholder="Search quarter no. or category…" oninput="renderInventory()"><select id="qStatus" onchange="renderInventory()"><option value="">All statuses</option><option>Vacant</option><option>Occupied</option><option>Maintenance</option></select><select id="qType" onchange="renderInventory()"><option value="">All categories</option><option>Type I</option><option>Type II</option><option>Type III</option><option>Type IV</option><option>Scholar</option></select></div>
+  <div class="table-wrap"><table><thead><tr><th>Quarter No.</th><th>Category</th><th>Zone</th><th>Status</th><th>Occupant / Reference</th><th>Actions</th></tr></thead><tbody id="inventoryRows"></tbody></table></div>
+  <div class="card" style="margin-top:14px"><h3>Add a fictional inventory record</h3><form id="addQuarterForm"><div class="formgrid">
+   <div class="field"><label>Quarter number</label><input name="quarter" required placeholder="e.g. DEMO-013"></div>
+   <div class="field"><label>Category</label><select name="category"><option>Type I</option><option>Type II</option><option>Type III</option><option>Type IV</option><option>Scholar</option></select></div>
+   <div class="field"><label>Zone</label><select name="zone"><option>Institute Zone</option><option>Quarters Zone</option><option>Hostel Zone</option></select></div>
+   <div class="field"><label>Status</label><select name="status"><option>Vacant</option><option>Occupied</option><option>Maintenance</option></select></div>
+  </div><div class="actions"><button class="primary" type="submit">Add record</button></div></form><div class="small">Prototype data is held in this browser tab only and may reset when reloaded.</div></div>
+ </section>
+ <section class="panel" id="applications">
+  <div class="section-head"><div><h2>Allotment applications</h2><p>Review the demo queue and change its illustrative status.</p></div><button class="primary" onclick="exportCSV('applications')">Export applications CSV</button></div>
+  <div class="table-wrap"><table><thead><tr><th>Application ID</th><th>Applicant</th><th>Requested category</th><th>Date</th><th>Status</th><th>Demo action</th></tr></thead><tbody id="applicationRows"></tbody></table></div>
+  <div class="card" style="margin-top:14px"><h3>Staff workflow checklist</h3><ol><li>Verify employee details and eligibility against approved rules.</li><li>Check application completeness and supporting documents.</li><li>Apply the approved priority and waiting-list policy.</li><li>Record the competent authority's decision and date.</li><li>Issue allotment / rejection communication and retain an audit trail.</li></ol><p class="small">This prototype does not decide eligibility or make official allotment decisions.</p></div>
+ </section>
 
-  <h2 id="notices">Circulars and lists</h2>
-  <p class="sub">Add new items in the NOTICES list in this file. Put PDFs in the <code>files</code> folder.</p>
-  <div id="noticeList"></div>
+ <section class="panel" id="workflow">
+  <div class="section-head"><div><h2>Official allotment workflow</h2><p>Stages follow the traditional EMD procedure you described. All records here are fictional.</p></div></div>
+  <div class="notice">The system tracks progress and records decisions; it does not automatically determine official seniority or make final allotment decisions. Those must follow approved NITT rules and competent-authority approval.</div>
+  <div class="card" style="margin-bottom:14px">
+   <h3>Workflow stages</h3>
+   <ol>
+    <li><strong>Publish circular</strong> — record circular number, publication date, application deadline and eligibility cutoff date.</li>
+    <li><strong>Receive applications</strong> — register each application and requested quarters category.</li>
+    <li><strong>Eligibility scrutiny</strong> — verify pay-level eligibility and, for current occupants, the three-year change-of-quarters rule as on the circular cutoff date. Record reasons for ineligibility.</li>
+    <li><strong>Forward eligible list to Establishment</strong> — record forwarding date and reference number.</li>
+    <li><strong>Record seniority received</strong> — enter the official seniority particulars/reference received from Establishment.</li>
+    <li><strong>Publish final eligible list</strong> — record publication date and list reference.</li>
+    <li><strong>Submit proposed allotment to Director</strong> — prepare the proposal based on approved seniority, eligibility and available quarters; record approval status and reference.</li>
+    <li><strong>Collect declaration</strong> — record receipt of the required declaration form.</li>
+    <li><strong>Issue allotment order</strong> — record order number and date after approval and required formalities.</li>
+    <li><strong>Register handover</strong> — record new-quarter occupation register entry and, for a change of quarters, previous-quarter vacation register entry.</li>
+   </ol>
+  </div>
+  <div class="card">
+   <h3>Application stage tracker (demo)</h3>
+   <p class="small">Use the selector to demonstrate stage tracking. In the production system, changes should be permission-controlled and recorded in an audit log.</p>
+   <div class="table-wrap"><table><thead><tr><th>Application ID</th><th>Applicant</th><th>Eligibility</th><th>Seniority</th><th>Current stage</th><th>Update demo stage</th></tr></thead><tbody id="workflowRows"></tbody></table></div>
+  </div>
+ </section>
 
-  <h2 id="faq">Questions</h2>
-  <details><summary>Can I apply for a higher type than my pay level?</summary><p>No. Applications for any type other than your eligible pay level are rejected at the eligibility check.</p></details>
-  <details><summary>I already have quarters. When can I apply for a change?</summary><p>After 3 years in your current quarters, counted as on the date of the circular.</p></details>
-  <details><summary>What do I sign after receiving the allotment order?</summary><p>The occupation register. For a change of quarters, also the vacation register of your previous quarters.</p></details>
-  <details><summary>Who decides the seniority?</summary><p>The Establishment section provides it. The Director approves the final allotment.</p></details>
 
-  <footer id="foot"></footer>
+ <section class="panel" id="eligibility">
+  <div class="section-head"><div><h2>Eligibility scrutiny</h2><p>Rule-based preliminary checks using the circular date and actual occupation date. All records are fictional.</p></div></div>
+  <div class="notice"><strong>Rule configuration:</strong> Three-year test is measured on the circular date, using actual occupation date. This is a preliminary screening aid only; approved NITT rules and authorized staff review prevail.</div>
+  <div class="card" style="margin-bottom:14px">
+   <h3>Allotment circular settings</h3>
+   <div class="formgrid">
+    <div class="field"><label>Circular reference (demo)</label><input id="circularRef" value="DEMO/CIRC/2026/01"></div>
+    <div class="field"><label>Circular date (eligibility cutoff)</label><input id="circularDate" type="date" value="2026-10-01"></div>
+    <div class="field"><label>Application deadline (tracking only)</label><input id="applicationDeadline" type="date" value="2026-10-21"></div>
+    <div class="field"><label>Three-year requirement</label><input value="3 years from actual occupation date" disabled></div>
+   </div>
+   <div class="actions"><button class="primary" onclick="runEligibility()">Run preliminary eligibility checks</button><button onclick="exportCSV('eligibility')">Export eligibility CSV</button></div>
+   <p class="small">Pay-level eligibility must be configured against the current approved quarters-allotment rules. This prototype does not invent pay-level mappings.</p>
+  </div>
+  <div class="grid">
+   <div class="metric"><div class="label">Applications checked</div><div class="value" id="eTotal">0</div></div>
+   <div class="metric"><div class="label">Preliminarily eligible</div><div class="value" id="eEligible">0</div></div>
+   <div class="metric"><div class="label">Flagged for review / ineligible</div><div class="value" id="eFlagged">0</div></div>
+   <div class="metric"><div class="label">Missing required data</div><div class="value" id="eMissing">0</div></div>
+  </div>
+  <div class="table-wrap"><table><thead><tr><th>Application ID</th><th>Applicant</th><th>Requested category</th><th>Pay level</th><th>Current quarter</th><th>Actual occupation date</th><th>Preliminary result</th><th>Reason / next action</th></tr></thead><tbody id="eligibilityRows"></tbody></table></div>
+  <div class="card" style="margin-top:14px">
+   <h3>Illustrative applicant records</h3>
+   <p class="small">Add fictional records here to test the three-year cutoff. Pay-level check remains “Pending rules configuration” until an authorized pay-level-to-quarter-category matrix is supplied.</p>
+   <form id="eligibilityForm"><div class="formgrid">
+    <div class="field"><label>Application ID</label><input name="id" required placeholder="QA-DEMO-2001"></div>
+    <div class="field"><label>Applicant (fictional)</label><input name="name" required placeholder="Demo Applicant D"></div>
+    <div class="field"><label>Requested category</label><select name="category"><option>Type I</option><option>Type II</option><option>Type III</option><option>Type IV</option><option>Scholar</option></select></div>
+    <div class="field"><label>Pay level</label><input name="payLevel" placeholder="e.g. Level 3"></div>
+    <div class="field"><label>Currently occupying institute quarters?</label><select name="currentOccupant" id="currentOccupant"><option value="no">No</option><option value="yes">Yes</option></select></div>
+    <div class="field"><label>Actual occupation date (if applicable)</label><input name="occupationDate" type="date"></div>
+   </div><div class="actions"><button class="primary" type="submit">Add fictional applicant</button></div></form>
+  </div>
+  <div class="card" style="margin-top:14px">
+   <h3>After eligibility scrutiny</h3>
+   <ol><li>Review each result and correct missing or inaccurate data.</li><li>Apply the approved pay-level/category matrix and all other applicable rules.</li><li>Have authorized staff approve the eligible and ineligible lists.</li><li>Forward only the approved eligible list to Establishment for official seniority particulars.</li><li>Record the Establishment communication reference and seniority details when received; do not calculate or invent seniority in EMD.</li></ol>
+  </div>
+ </section>
+
+ <section class="panel" id="employee">
+  <div class="section-head"><div><h2>Employee self-service</h2><p>Sample application form and demo status lookup.</p></div></div>
+  <div class="two">
+   <div class="card"><h3>Submit a demo application</h3><form id="employeeForm"><div class="formgrid">
+    <div class="field"><label>Employee name (fictional)</label><input name="name" required placeholder="e.g. Demo Employee"></div>
+    <div class="field"><label>Employee reference (fictional)</label><input name="employeeRef" required placeholder="e.g. DEMO-EMP-101"></div>
+    <div class="field"><label>Requested category</label><select name="category"><option>Type I</option><option>Type II</option><option>Type III</option><option>Type IV</option></select></div>
+    <div class="field"><label>Preferred zone</label><select name="zone"><option>No preference</option><option>Institute Zone</option><option>Quarters Zone</option><option>Hostel Zone</option></select></div>
+    <div class="field full"><label>Note (do not enter sensitive information)</label><textarea name="note" rows="3" placeholder="Optional demo note"></textarea></div>
+   </div><div class="actions"><button class="primary" type="submit">Submit demo application</button></div></form><div class="status-msg" id="employeeMessage"></div></div>
+   <div class="card"><h3>Check application status</h3><p class="small">Enter an application ID generated in this demo. This is not a secure identity check.</p><div class="field"><label>Application ID</label><input id="lookupId" placeholder="e.g. QA-DEMO-1004"></div><div class="actions"><button onclick="lookupApplication()">Check status</button></div><div id="lookupResult" style="margin-top:12px"></div><hr style="border:0;border-top:1px solid var(--line);margin:18px 0"><h3>Before production</h3><ul><li>Institute-approved sign-in</li><li>Employee-specific access to own records</li><li>Secure document upload</li><li>Notifications and application history</li></ul></div>
+  </div>
+ </section>
+ <section class="panel" id="import">
+  <div class="section-head"><div><h2>Import and export</h2><p>Prepare the inventory in Excel, then save it as CSV UTF-8 for this prototype.</p></div></div>
+  <div class="two">
+   <div class="card"><h3>Import quarters CSV</h3><p>Required columns: <code>quarter,category,zone,status,occupant</code>. Column names are case-insensitive. Status should be Vacant, Occupied, or Maintenance.</p><input type="file" id="csvFile" accept=".csv,text/csv"><div class="actions"><button class="primary" onclick="importCSV()">Import CSV</button><button onclick="downloadTemplate()">Download CSV template</button></div><div class="status-msg" id="importMessage"></div><p class="small">Excel workbooks (.xlsx) are not read directly in this prototype. Open the relevant sheet in Excel and use Save As → CSV UTF-8 (Comma delimited).</p></div>
+   <div class="card"><h3>Data handling notes</h3><ul><li>Export creates a local CSV download.</li><li>Import replaces the current demo inventory.</li><li>No data is uploaded to a server by this prototype.</li><li>Do not import real employee details or confidential institute records into this demo.</li></ul><h3>Suggested Excel columns</h3><p><code>quarter</code>, <code>category</code>, <code>zone</code>, <code>status</code>, <code>occupant</code>, <code>occupation_date</code>, <code>vacation_date</code>, <code>remarks</code></p></div>
+  </div>
+ </section>
 </main>
-
+<footer>Prototype v0.1 · Designed for workflow validation only · Not an official NIT Trichy website · No real authentication or server-side storage.</footer>
 <script>
-/* ===== CONFIG: edit these ===== */
-var INSTITUTE = "Institute Estate Section";
-var CONTACT   = "estate@example.edu | Office hours 9:30 to 17:30";
-var MIN_YEARS_IN_QUARTERS = 3;
-var FORM_URL = "";   /* paste your Google Form link here (the /viewform one) */
-var SALT = "change-this-salt";   /* must match tools/make_status.py */
-/* Pay level => quarters type. Replace with your actual rules. */
-var ELIGIBILITY = {
-  1:"Type I",2:"Type I",3:"Type II",4:"Type II",5:"Type III",6:"Type III",
-  7:"Type IV",8:"Type IV",9:"Type IV",10:"Type V",11:"Type V",12:"Type VI",13:"Type VI",14:"Type VII"
-};
-/* ===== NOTICES: newest first ===== */
-var NOTICES = [
-  {title:"Quarters circular (sample)", date:"2026-10-01", note:"Applications open", file:"files/circular.pdf", open:true},
-  {title:"Final list (sample)", date:"2026-08-12", note:"Previous cycle", file:"files/final-list.pdf", open:false}
+const initialQuarters = [
+{quarter:"DEMO-A-001",category:"Type I",zone:"Institute Zone",status:"Occupied",occupant:"Demo Employee 01"},
+{quarter:"DEMO-A-002",category:"Type I",zone:"Institute Zone",status:"Vacant",occupant:""},
+{quarter:"DEMO-B-011",category:"Type II",zone:"Quarters Zone",status:"Occupied",occupant:"Demo Employee 02"},
+{quarter:"DEMO-B-012",category:"Type II",zone:"Quarters Zone",status:"Maintenance",occupant:""},
+{quarter:"DEMO-C-021",category:"Type III",zone:"Quarters Zone",status:"Vacant",occupant:""},
+{quarter:"DEMO-C-022",category:"Type III",zone:"Institute Zone",status:"Occupied",occupant:"Demo Employee 03"},
+{quarter:"DEMO-D-031",category:"Type IV",zone:"Institute Zone",status:"Vacant",occupant:""},
+{quarter:"DEMO-D-032",category:"Type IV",zone:"Quarters Zone",status:"Occupied",occupant:"Demo Employee 04"},
+{quarter:"DEMO-S-101",category:"Scholar",zone:"Hostel Zone",status:"Occupied",occupant:"Demo Scholar 01"},
+{quarter:"DEMO-S-102",category:"Scholar",zone:"Hostel Zone",status:"Vacant",occupant:""},
+{quarter:"DEMO-S-103",category:"Scholar",zone:"Hostel Zone",status:"Maintenance",occupant:""},
+{quarter:"DEMO-B-013",category:"Type II",zone:"Institute Zone",status:"Vacant",occupant:""}
 ];
-/* ================================ */
-(function(){
-  document.getElementById("brand").textContent = INSTITUTE;
-  document.title = "Quarters Allotment | " + INSTITUTE;
-  document.getElementById("foot").textContent = CONTACT;
-  var lvl = document.getElementById("lvl");
-  Object.keys(ELIGIBILITY).forEach(function(k){
-    var o = document.createElement("option"); o.value = k; o.textContent = "Level " + k; lvl.appendChild(o);
-  });
-  var occ = document.getElementById("occ"), wrap = document.getElementById("occWrap");
-  occ.addEventListener("change", function(){ wrap.hidden = occ.value !== "yes"; });
+let quarters = initialQuarters.map(x=>({...x}));
+let applications = [
+{id:"QA-DEMO-1001",name:"Demo Applicant A",category:"Type II",date:"2026-10-14",status:"Pending",zone:"Institute Zone",eligibility:"Eligible (Demo)",seniority:"Awaiting Establishment",stage:"Eligibility scrutiny"},
+{id:"QA-DEMO-1002",name:"Demo Applicant B",category:"Type III",date:"2026-10-16",status:"Under Review",zone:"Quarters Zone",eligibility:"Eligible (Demo)",seniority:"Seniority received (Demo)",stage:"Prepare allotment proposal"},
+{id:"QA-DEMO-1003",name:"Demo Applicant C",category:"Type I",date:"2026-10-18",status:"Approved (Demo)",zone:"Institute Zone",eligibility:"Eligible (Demo)",seniority:"Seniority received (Demo)",stage:"Allotment order issued (Demo)"}
+];
+function switchTab(id){if(id==="eligibility"&&eligibilityResults.length===0)runEligibility();document.querySelectorAll(".tab").forEach(b=>b.classList.toggle("active",b.dataset.tab===id));document.querySelectorAll(".panel").forEach(p=>p.classList.toggle("active",p.id===id));if(id==="dashboard")renderDashboard()}
+document.querySelectorAll(".tab").forEach(b=>b.addEventListener("click",()=>switchTab(b.dataset.tab)));
+function esc(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function statusClass(s){return s==="Vacant"?"vacant":s==="Occupied"?"occupied":s==="Maintenance"?"maintenance":s.includes("Approved")?"approved":"pending"}
+function renderDashboard(){
+ const total=quarters.length,v=quarters.filter(q=>q.status==="Vacant").length,o=quarters.filter(q=>q.status==="Occupied").length,p=applications.filter(a=>!a.status.includes("Approved")).length;
+ document.getElementById("mTotal").textContent=total;document.getElementById("mVacant").textContent=v;document.getElementById("mOccupied").textContent=o;document.getElementById("mPending").textContent=p;
+ const statuses=["Vacant","Occupied","Maintenance"];document.getElementById("statusBars").innerHTML=statuses.map(s=>{const n=quarters.filter(q=>q.status===s).length;const pct=total?Math.round(n/total*100):0;return `<div class="barrow"><span>${s}</span><div class="bar"><span style="width:${pct}%"></span></div><strong>${n}</strong></div>`}).join("");
+ document.getElementById("recentApps").innerHTML=applications.slice().reverse().slice(0,3).map(a=>`<div style="padding:9px 0;border-bottom:1px solid var(--line)"><strong>${esc(a.id)}</strong><div class="small">${esc(a.name)} · ${esc(a.category)}</div><span class="pill ${statusClass(a.status)}">${esc(a.status)}</span></div>`).join("")||'<div class="empty">No applications</div>';
+}
+function renderInventory(){
+ const s=document.getElementById("qSearch").value.toLowerCase(),st=document.getElementById("qStatus").value,ty=document.getElementById("qType").value;
+ const rows=quarters.filter(q=>(!s||(q.quarter+" "+q.category).toLowerCase().includes(s))&&(!st||q.status===st)&&(!ty||q.category===ty));
+ document.getElementById("inventoryRows").innerHTML=rows.map(q=>`<tr><td><strong>${esc(q.quarter)}</strong></td><td>${esc(q.category)}</td><td>${esc(q.zone)}</td><td><span class="pill ${statusClass(q.status)}">${esc(q.status)}</span></td><td>${esc(q.occupant||"—")}</td><td><button onclick="cycleStatus('${esc(q.quarter)}')">Change demo status</button></td></tr>`).join("")||'<tr><td colspan="6" class="empty">No matching quarters</td></tr>';
+}
+let eligibilityApplicants = [
+{id:"QA-DEMO-2001",name:"Demo Applicant D",category:"Type II",payLevel:"Level 3",currentOccupant:"yes",occupationDate:"2023-09-15"},
+{id:"QA-DEMO-2002",name:"Demo Applicant E",category:"Type III",payLevel:"Level 10",currentOccupant:"yes",occupationDate:"2024-03-01"},
+{id:"QA-DEMO-2003",name:"Demo Applicant F",category:"Type I",payLevel:"",currentOccupant:"no",occupationDate:""}
+];
+let eligibilityResults=[];
+const workflowStages=["Circular published","Applications received","Eligibility scrutiny","Eligible list sent to Establishment","Seniority received","Final eligible list published","Prepare allotment proposal","Director approval","Declaration collected","Allotment order issued","Registers completed"];
+function renderWorkflow(){const el=document.getElementById("workflowRows");if(!el)return;el.innerHTML=applications.map(a=>`<tr><td><strong>${esc(a.id)}</strong></td><td>${esc(a.name)}</td><td>${esc(a.eligibility||"Not verified")}</td><td>${esc(a.seniority||"Not received")}</td><td>${esc(a.stage||"Applications received")}</td><td><select aria-label="Workflow stage" onchange="changeWorkflowStage('${esc(a.id)}',this.value)">${workflowStages.map(s=>`<option ${s===(a.stage||"Applications received")?"selected":""}>${esc(s)}</option>`).join("")}</select></td></tr>`).join("")}
+function changeWorkflowStage(id,stage){const a=applications.find(x=>x.id===id);if(a){a.stage=stage;renderWorkflow()}}
+function renderApplications(){document.getElementById("applicationRows").innerHTML=applications.map(a=>`<tr><td><strong>${esc(a.id)}</strong></td><td>${esc(a.name)}<div class="small">${esc(a.zone||"")}</div></td><td>${esc(a.category)}</td><td>${esc(a.date)}</td><td><span class="pill ${statusClass(a.status)}">${esc(a.status)}</span></td><td><select aria-label="Demo application status" onchange="changeAppStatus('${esc(a.id)}',this.value)"><option ${a.status==="Pending"?"selected":""}>Pending</option><option ${a.status==="Under Review"?"selected":""}>Under Review</option><option ${a.status==="Approved (Demo)"?"selected":""}>Approved (Demo)</option><option ${a.status==="Not Approved (Demo)"?"selected":""}>Not Approved (Demo)</option></select></td></tr>`).join("");renderWorkflow()}
 
-  document.getElementById("go").addEventListener("click", function(){
-    var r = document.getElementById("result"), type = ELIGIBILITY[lvl.value];
-    var cd = document.getElementById("cd").value, od = document.getElementById("od").value;
-    var ok = true, msg = "You can apply for " + type + " quarters.";
-    if (occ.value === "yes") {
-      if (!cd || !od) { r.className = "bad"; r.innerHTML = "<strong>Dates needed</strong>Enter the circular date and your occupation date."; return; }
-      var limit = new Date(od); limit.setFullYear(limit.getFullYear() + MIN_YEARS_IN_QUARTERS);
-      if (new Date(cd) < limit) {
-        ok = false;
-        msg = "You must complete " + MIN_YEARS_IN_QUARTERS + " years in your current quarters as on the circular date. You reach that on " + limit.toDateString() + ".";
-      } else { msg = "You have completed " + MIN_YEARS_IN_QUARTERS + " years. You can apply for a change to " + type + " quarters."; }
-    }
-    r.className = ok ? "ok" : "bad";
-    r.innerHTML = "<strong>" + (ok ? "Likely eligible" : "Not eligible for this circular") + "</strong>" + msg;
-  });
+function yearsAgoDate(dateStr, years){const d=new Date(dateStr+"T12:00:00");if(Number.isNaN(d.getTime()))return null;const originalMonth=d.getMonth();d.setFullYear(d.getFullYear()-years);if(d.getMonth()!==originalMonth)d.setDate(0);return d}
+function runEligibility(){
+ const cutoff=document.getElementById("circularDate").value;
+ if(!cutoff){alert("Enter the circular date to run the three-year test.");return}
+ const cutoffDate=new Date(cutoff+"T12:00:00");const threshold=yearsAgoDate(cutoff,3);
+ eligibilityResults=eligibilityApplicants.map(a=>{
+  let result="Needs review",reason=[];
+  if(!a.category)reason.push("Requested category missing");
+  if(!a.payLevel)reason.push("Pay level missing; verify against approved pay-level/category rules");
+  else reason.push("Pay-level/category eligibility requires approved rule matrix and staff verification");
+  if(a.currentOccupant==="yes"){
+   if(!a.occupationDate){reason.push("Actual occupation date missing");}
+   else{
+    const occ=new Date(a.occupationDate+"T12:00:00");
+    if(occ>cutoffDate){reason.push("Occupation date is after circular date; verify record");}
+    else if(occ>threshold){result="Flagged — less than 3 years";reason.push("Three years have not elapsed as of circular date");}
+    else {result="Three-year test passed";reason.push("Three years elapsed by circular date; other eligibility rules still require verification");}
+   }
+  }else{result="No current quarter — 3-year test not applicable";reason.push("Check other approved eligibility conditions");}
+  if(!a.category||!a.payLevel||(a.currentOccupant==="yes"&&!a.occupationDate))result="Missing data / review";
+  return {...a,result,reason:reason.join("; "),circularDate:cutoff,thresholdDate:threshold.toISOString().slice(0,10)};
+ });
+ document.getElementById("eTotal").textContent=eligibilityResults.length;
+ document.getElementById("eEligible").textContent=eligibilityResults.filter(r=>r.result==="Three-year test passed"||r.result==="No current quarter — 3-year test not applicable").length;
+ document.getElementById("eFlagged").textContent=eligibilityResults.filter(r=>r.result.includes("Flagged")).length;
+ document.getElementById("eMissing").textContent=eligibilityResults.filter(r=>r.result.includes("Missing")||r.result==="Needs review").length;
+ document.getElementById("eligibilityRows").innerHTML=eligibilityResults.map(a=>`<tr><td><strong>${esc(a.id)}</strong></td><td>${esc(a.name)}</td><td>${esc(a.category)}</td><td>${esc(a.payLevel||"—")}</td><td>${a.currentOccupant==="yes"?"Yes":"No"}</td><td>${esc(a.occupationDate||"—")}</td><td><span class="pill ${a.result.includes("Flagged")?"maintenance":a.result.includes("passed")||a.result.startsWith("No current")?"approved":"pending"}">${esc(a.result)}</span></td><td>${esc(a.reason)}</td></tr>`).join("")||'<tr><td colspan="8" class="empty">Add fictional applicants, then run checks.</td></tr>';
+}
+document.getElementById("eligibilityForm").addEventListener("submit",e=>{e.preventDefault();const f=new FormData(e.target);if(eligibilityApplicants.some(a=>a.id.toLowerCase()===String(f.get("id")).trim().toLowerCase())){alert("Application ID already exists.");return}eligibilityApplicants.push({id:String(f.get("id")).trim(),name:String(f.get("name")).trim(),category:f.get("category"),payLevel:String(f.get("payLevel")).trim(),currentOccupant:f.get("currentOccupant"),occupationDate:f.get("occupationDate")});e.target.reset();runEligibility();alert("Fictional applicant added. Review the preliminary result.");});
 
-  var box = document.getElementById("applyBox");
-  if (FORM_URL) {
-    box.innerHTML = '<p style="margin-top:0">Fill the form once. Keep the confirmation email as proof.</p>';
-    var a2 = document.createElement("a"); a2.className = "btn"; a2.href = FORM_URL; a2.target = "_blank"; a2.rel = "noopener"; a2.textContent = "Open application form";
-    box.appendChild(a2);
-  } else { box.textContent = "The application form is not open yet. Check Circulars for the next date."; }
-
-  document.getElementById("chk").addEventListener("click", function(){
-    var id = document.getElementById("eid").value.trim().toUpperCase(), out = document.getElementById("sres");
-    function show(c, h, m){ out.style.display = "block"; out.style.borderColor = c; out.innerHTML = "<strong>" + h + "</strong>" + m; }
-    if (!id) { show("var(--bad)", "Enter your ID", ""); return; }
-    if (!window.crypto || !crypto.subtle) { show("var(--bad)", "Not supported", "Open this page over https."); return; }
-    crypto.subtle.digest("SHA-256", new TextEncoder().encode(SALT + id)).then(function(buf){
-      var h = Array.from(new Uint8Array(buf)).map(function(x){ return x.toString(16).padStart(2, "0"); }).join("");
-      return fetch("status.json", {cache: "no-store"}).then(function(r){ return r.json(); }).then(function(db){
-        var e = db[h];
-        if (!e) { show("var(--bad)", "No record found", "Check your ID, or contact the Estate section."); return; }
-        show("var(--ok)", e.stage, e.quarters ? "Quarters: " + e.quarters : "");
-        if (e.order) { var d = document.createElement("a"); d.className = "btn"; d.href = e.order; d.download = "allotment-order.pdf"; d.style.marginTop = "12px"; d.textContent = "Download allotment order"; out.appendChild(document.createElement("br")); out.appendChild(d); }
-      });
-    }).catch(function(){ show("var(--bad)", "Could not load status", "Try again later."); });
-  });
-
-  var list = document.getElementById("noticeList");
-  NOTICES.forEach(function(n){
-    var d = document.createElement("div"); d.className = "notice";
-    var left = document.createElement("div");
-    var b = document.createElement("b"); b.textContent = n.title;
-    var s = document.createElement("span"); s.textContent = new Date(n.date).toLocaleDateString("en-IN",{day:"numeric",month:"long",year:"numeric"}) + " - " + n.note;
-    left.appendChild(b); left.appendChild(s);
-    var right = document.createElement("div");
-    if (n.open) { var t = document.createElement("span"); t.className = "tag open"; t.textContent = "Open"; right.appendChild(t); right.appendChild(document.createTextNode(" ")); }
-    var a = document.createElement("a"); a.href = n.file; a.textContent = "Download PDF"; a.className = "btn alt"; a.style.padding = "6px 12px"; right.appendChild(a);
-    d.appendChild(left); d.appendChild(right); list.appendChild(d);
-  });
-})();
+function cycleStatus(id){const q=quarters.find(x=>x.quarter===id);if(!q)return;const states=["Vacant","Occupied","Maintenance"];q.status=states[(states.indexOf(q.status)+1)%states.length];if(q.status!=="Occupied")q.occupant="";renderInventory();renderDashboard()}
+function changeAppStatus(id,status){const a=applications.find(x=>x.id===id);if(a)a.status=status;renderApplications();renderDashboard()}
+document.getElementById("addQuarterForm").addEventListener("submit",e=>{e.preventDefault();const f=new FormData(e.target),quarter=f.get("quarter").trim();if(quarters.some(q=>q.quarter.toLowerCase()===quarter.toLowerCase())){alert("That quarter number already exists in this demo.");return}quarters.push({quarter,category:f.get("category"),zone:f.get("zone"),status:f.get("status"),occupant:""});e.target.reset();renderInventory();renderDashboard();alert("Fictional demo record added.")});
+document.getElementById("employeeForm").addEventListener("submit",e=>{e.preventDefault();const f=new FormData(e.target);const id="QA-DEMO-"+(1000+applications.length+1);applications.push({id,name:f.get("name"),category:f.get("category"),date:new Date().toISOString().slice(0,10),status:"Pending",zone:f.get("zone"),eligibility:"Not verified",seniority:"Not requested",stage:"Applications received"});const m=document.getElementById("employeeMessage");m.style.display="block";m.innerHTML=`Demo application created. Reference ID: <strong>${esc(id)}</strong>. Save this ID to test the status lookup.`;document.getElementById("lookupId").value=id;e.target.reset();renderApplications();renderDashboard()});
+function lookupApplication(){const id=document.getElementById("lookupId").value.trim();const a=applications.find(x=>x.id.toLowerCase()===id.toLowerCase());document.getElementById("lookupResult").innerHTML=a?`<div class="card"><strong>${esc(a.id)}</strong><p>${esc(a.category)} · ${esc(a.date)}</p><span class="pill ${statusClass(a.status)}">${esc(a.status)}</span><p class="small">Demo only; this is not identity-verified.</p></div>`:'<p class="small">No matching demo application. Check the reference ID.</p>'}
+function csvCell(v){return '"'+String(v??"").replace(/"/g,'""')+'"'}
+function downloadText(name,content,type="text/csv"){const blob=new Blob([content],{type:type+";charset=utf-8;"});const url=URL.createObjectURL(blob);const a=document.createElement("a");a.href=url;a.download=name;a.click();URL.revokeObjectURL(url)}
+function exportCSV(kind){const data=kind==="quarters"?quarters:kind==="eligibility"?eligibilityResults:applications;const keys=kind==="quarters"?["quarter","category","zone","status","occupant"]:kind==="eligibility"?["id","name","category","payLevel","currentOccupant","occupationDate","result","reason","circularDate"]:["id","name","category","date","status","zone"];downloadText(kind+"_demo_export.csv",[keys.join(","),...data.map(r=>keys.map(k=>csvCell(r[k])).join(","))].join("\r\n"))}
+function downloadTemplate(){downloadText("nitt_quarters_inventory_template.csv","quarter,category,zone,status,occupant\r\nDEMO-001,Type I,Institute Zone,Vacant,\r\n")}
+function parseCSV(text){const out=[];let row=[],cell="",quoted=false;for(let i=0;i<text.length;i++){const c=text[i],n=text[i+1];if(quoted){if(c==='"'&&n==='"'){cell+='"';i++}else if(c==='"')quoted=false;else cell+=c}else if(c==='"')quoted=true;else if(c===","){row.push(cell);cell=""}else if(c==="\n"){row.push(cell.replace(/\r$/,""));out.push(row);row=[];cell=""}else cell+=c}if(cell.length||row.length){row.push(cell.replace(/\r$/,""));out.push(row)}return out}
+function importCSV(){const file=document.getElementById("csvFile").files[0],m=document.getElementById("importMessage");m.style.display="block";if(!file){m.textContent="Choose a CSV file first.";return}const reader=new FileReader();reader.onload=()=>{try{const parsed=parseCSV(reader.result);if(parsed.length<2)throw Error("No data rows found.");const heads=parsed[0].map(h=>h.trim().toLowerCase());const required=["quarter","category","zone","status"];const missing=required.filter(h=>!heads.includes(h));if(missing.length)throw Error("Missing required column(s): "+missing.join(", "));const rows=parsed.slice(1).filter(r=>r.some(c=>c.trim())).map(r=>{const obj={};heads.forEach((h,i)=>obj[h]=(r[i]||"").trim());const stat=obj.status.toLowerCase();const status=stat==="vacant"?"Vacant":stat==="occupied"?"Occupied":stat==="maintenance"?"Maintenance":null;if(!obj.quarter||!status)throw Error("Each row needs a quarter number and status Vacant, Occupied, or Maintenance.");return {quarter:obj.quarter,category:obj.category||"Unspecified",zone:obj.zone||"Unspecified",status,occupant:obj.occupant||""}});if(!rows.length)throw Error("No usable rows found.");if(new Set(rows.map(r=>r.quarter.toLowerCase())).size!==rows.length)throw Error("Duplicate quarter numbers found in the CSV.");quarters=rows;renderInventory();renderDashboard();m.textContent=`Imported ${rows.length} inventory rows into this browser demo. This did not upload them to a server.`;document.getElementById("csvFile").value="";}catch(err){m.textContent="Import failed: "+err.message}};reader.readAsText(file)}
+renderDashboard();renderInventory();renderApplications();renderWorkflow();
 </script>
-</body>
-</html>
+</body></html>
